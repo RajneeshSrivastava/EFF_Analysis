@@ -6,6 +6,7 @@ author: "Rajneesh Srivastava"
 	#last updated: 03/01/2023
 ```
 #### Load libraries
+```
 library(Seurat)
 library(dplyr)
 library(Matrix)
@@ -15,7 +16,7 @@ library(future)
 library(sctransform)
 plan("multisession", workers = 4)
 options(future.globals.maxSize = 15000 * 1024^2)
-
+```
 #### UPLOAD DATA
 ```
 setwd("path/EFF_project/")
