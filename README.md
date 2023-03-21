@@ -148,11 +148,11 @@ for(i in 1:nrow(GSM)){
 sample15@meta.data=GSM
 #saveRDS (sample15, file = "sample15.rds")
 ```
-
 ##### Cell distribution across groups, and expression profile of Fb markers
+```
 DimPlot(sample15, split.by="group") #Figure 2A
 VlnPlot(sample15,features=c("THY1","S100A4","VIM","COL1A1","COL1A2", "FBLN1"),flip=T,stack=T) #Figure 2B
-
+```
 #### DE analysis for all clusters (related to Figure 2C)
 ```
 DefaultAssay(sample15)="SCT"
