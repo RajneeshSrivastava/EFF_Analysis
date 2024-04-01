@@ -1,9 +1,7 @@
 ## Project: To explore the EFF induced cell state of HADF cells at single cell resolution
 ```
 author: "Rajneesh Srivastava"
-#dates: 
-	#original: 04/20/2022
-	#last updated: 03/01/2023
+#date: 04/01/2024
 ```
 #### Load libraries
 ```
@@ -21,7 +19,7 @@ options(future.globals.maxSize = 15000 * 1024^2)
 ```
 setwd("path/EFF_project/")
 EFF.dir = "path/EFF_project/dataset/"
-EFF.list=list("CHDAF", "EFFCSD5", "EFFTET123D5")
+EFF.list=list("CHADF", "EFFCSD5", "EFFTET123D5")
 
 for (file in EFF.list){
                EFF_data <- Read10X_h5(filename =    
@@ -38,7 +36,7 @@ for (file in EFF.list){
 ```
 #### QUALITY FILTERING AND VISUALIZATION
 ```
-sample.list=list(CHDAF, EFFCSD5, EFFTET123D5)
+sample.list=list(CHADF, EFFCSD5, EFFTET123D5)
 
 for (i in 1:length(sample.list)) {
     sample.list[[i]][["percent.mt"]] <-
@@ -52,7 +50,6 @@ for (i in 1:length(sample.list)) {
                                     vars.to.regress = "percent.mt", 
                                     verbose = FALSE)
                                  }
-#rm(CHDAF,EFFCSD5, EFFTET123D5, EFF.dir,EFF_data,EFF_obj,EFF.list,file)
 ```
 ##### Generate violin plots
 ```
@@ -119,18 +116,18 @@ sample15 <- FindClusters(sample.integrated, resolution = 0.15)
 #sample15=readRDS("path/sample15.rds")
 #Idents(sample15)="seurat_clusters"
 
-CHDAF=subset(sample15,subset=orig.ident=="CHDAF")
-nonCHDAF=subset(sample15,subset=orig.ident!="CHDAF")
+CHADF=subset(sample15,subset=orig.ident=="CHADF")
+nonCHADF=subset(sample15,subset=orig.ident!="CHADF")
 
-sd_CHDAF = subset(CHDAF, cells = sample(Cells(CHDAF), 2000))
-sample15 <- merge(nonCHDAF, y = sd_CHDAF, merge.data = TRUE, add.cell.ids = c("trns", "sd_ctrl"),merge.dr=c("pca","tsne","umap"))
+sd_CHADF = subset(CHADF, cells = sample(Cells(CHADF), 2000))
+sample15 <- merge(nonCHADF, y = sd_CHADF, merge.data = TRUE, add.cell.ids = c("trns", "sd_ctrl"),merge.dr=c("pca","tsne","umap"))
 ```
 ##### tweak-in IDs
 ```
 #meta=read.table("metadata.txt",sep="\t", header=T)
 head(meta)
       orig.id              group
-1       CHDAF            control
+1       CHADF            control
 2     EFFCSD5       EFF+scramble
 3 EFFTET123D5 EFF+TET1/2/3 siRNA
 
